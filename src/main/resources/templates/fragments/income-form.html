@@ -1,0 +1,7 @@
+<div th:fragment="incomeForm">
+    <form action="/income" method="post"><!--actionはフォームの送信先、methodのpostは送信するという意味-->
+        <label for="income">今月の収入</label><!--forはフォームのラベルと紐づけるためのもの-->
+        <input type="number" id="income" name="income"><!--idはフォームのid、nameはデータベースに保存するときの名前-->
+        <button type="submit">登録</button>
+    </form>
+</div>
