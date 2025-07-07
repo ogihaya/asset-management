@@ -1,0 +1,16 @@
+<div th:fragment="assetListMain">
+    <!-- 資産名のリストがあるかチェック -->
+    <div th:if="${assetNames != null and !assetNames.empty}">
+        <ul class="asset-list">
+            <!-- 各資産名をループで表示 -->
+            <li th:each="assetName : ${assetNames}" class="asset-item">
+                <span th:text="${assetName}"></span>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- 資産名がない場合のメッセージ -->
+    <div th:if="${assetNames == null or assetNames.empty}" class="no-assets">
+        <p>登録されている資産がありません。</p>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div th:fragment="assetAddModal">
+    <!-- モーダル -->
+    <div id="addAssetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>新しい資産を追加</h3>
+                <span class="close" onclick="closeAddAssetModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="addAssetForm" th:action="@{/add-asset}" method="post">
+                    <div class="form-group">
+                        <label for="assetName">資産名:</label>
+                        <input type="text" id="assetName" name="assetName" required 
+                               placeholder="例: 株式、債券、不動産など">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeAddAssetModal()">
+                            キャンセル
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            追加
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div th:fragment="assetList">
+    <!-- 資産名のリストを表示 -->
+    <div th:replace="fragments/asset-list-fragments/asset-list-main :: assetListMain"></div>
+
+    <!-- 資産追加ボタン -->
+    <div class="add-asset-section">
+        <button type="button" class="btn btn-primary" onclick="openAddAssetModal()">
+            追加
+        </button>
+    </div>
+
+    <!-- 資産追加モーダル -->
+    <div th:replace="fragments/asset-list-fragments/asset-add-modal :: assetAddModal"></div>
+</div>
