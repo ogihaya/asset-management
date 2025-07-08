@@ -1,0 +1,39 @@
+<div th:fragment="assetListMain">
+     <!-- 資産データがない場合のメッセージ -->
+     <div th:if="${#lists.isEmpty(allAssetMasters)}" class="no-data-message">
+        <p>この月の資産データがありません。</p>
+    </div>
+    
+    <!-- 資産名と金額のリスト -->
+    <div th:if="${!#lists.isEmpty(allAssetMasters)}" class="asset-list">
+        <table class="asset-table">
+            <thead>
+                <tr>
+                    <th>資産名</th>
+                    <th>金額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 各資産データをループで表示 -->
+                <tr th:each="assetMaster : ${allAssetMasters}">
+                    <td th:text="${assetMaster.assetName}">資産名</td>
+                    <td>
+                        <!--その月にデータがある場合、金額を表示-->
+                        <div th:if="${existingAssetDataMap.containsKey(assetMaster.id)}" class="asset-amount">
+                            <span th:text="${#numbers.formatInteger(existingAssetDataMap.get(assetMaster.id).amount, 1, 'COMMA')} + '円'"></span>
+                        </div>
+                        <!--その月にデータがない場合、入力を表示-->
+                        <div th:if="${!existingAssetDataMap.containsKey(assetMaster.id)}" class="asset-input-form">
+                            <form th:action="@{/asset-save}" method="post" class="inline-form">
+                                <input type="hidden" name="assetMasterId" th:value="${assetMaster.id}">
+                                <input type="hidden" name="targetMonth" th:value="${currentYearMonth}">
+                                <input type="number" name="amount" placeholder="金額を入力" class="asset-amount-input">
+                                <button type="submit" class="btn-save">保存</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

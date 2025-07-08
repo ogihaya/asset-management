@@ -1,7 +1,21 @@
 <div th:fragment="incomeForm">
-    <form action="/income" method="post"><!--actionはフォームの送信先、methodのpostは送信するという意味-->
-        <label for="income">今月の収入</label><!--forはフォームのラベルと紐づけるためのもの-->
-        <input type="number" id="income" name="income"><!--idはフォームのid、nameはデータベースに保存するときの名前-->
-        <button type="submit">登録</button>
-    </form>
+    <!-- 現在の月の収入データがある場合の表示 -->
+    <div th:if="${currentMonthIncome != null}">
+        <h3>今月の収入</h3>
+        <div class="income-display">
+            <p class="income-amount">
+                <span th:text="${#numbers.formatInteger(currentMonthIncome.amount, 1, 'COMMA')}"></span>円
+            </p>
+        </div>
+    </div>
+    <!-- 現在の月の収入データがない場合の入力フォーム -->
+    <div th:unless="${currentMonthIncome != null}">
+        <h3>今月の収入を登録</h3>
+        <form action="/income-save" method="post" class="income-form">
+            <label for="income">今月の収入</label>
+            <input type="number" id="income" name="income" placeholder="収入金額を入力してください" required>
+            <input type="hidden" name="targetMonth" th:value="${currentYearMonth}">
+            <button type="submit">登録</button>
+        </form>
+    </div>
 </div>
