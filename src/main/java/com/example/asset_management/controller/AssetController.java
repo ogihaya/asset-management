@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.example.asset_management.repository.IncomeDataRepository;
 import java.time.YearMonth;
 import com.example.asset_management.entity.IncomeData;
@@ -29,27 +30,39 @@ public class AssetController {
     private AssetMasterRepository assetMasterRepository;
 
     @GetMapping("/")
-    public String showAssetList(Model model) {
+    public String showAssetList(
+        @RequestParam(value = "yearMonth", required = false) String yearMonthParam,
+        Model model) {
 
-        YearMonth currentYearMonth = YearMonth.now();
+        YearMonth targetYearMonth;
+        if(yearMonthParam != null && !yearMonthParam.isEmpty()) {
+            targetYearMonth = YearMonth.parse(yearMonthParam);
+        } else {
+            targetYearMonth = YearMonth.now();
+        }
 
-        IncomeData currentMonthIncome = incomeDataRepository.findByTargetMonth(currentYearMonth).orElse(null);
+        IncomeData targetMonthIncome = incomeDataRepository.findByTargetMonth(targetYearMonth).orElse(null);
 
-        List<AssetData> currentMonthAssets = assetDataRepository.findByTargetMonthOrderByAssetMaster_AssetName(currentYearMonth);
+        List<AssetData> targetMonthAssets = assetDataRepository.findByTargetMonthOrderByAssetMaster_AssetName(targetYearMonth);
 
         List<AssetMaster> allAssetMasters = assetMasterRepository.findAll();
 
-        Map<Long, AssetData> existingAssetDataMap = currentMonthAssets.stream()
+        Map<Long, AssetData> existingAssetDataMap = targetMonthAssets.stream()
             .collect(Collectors.toMap(
                 assetData -> assetData.getAssetMaster().getId(),
                 assetData -> assetData
             ));
 
-        model.addAttribute("currentMonthIncome", currentMonthIncome);
-        model.addAttribute("currentYearMonth", currentYearMonth.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM")));
-        model.addAttribute("currentMonthAssets", currentMonthAssets);
+        YearMonth previousYearMonth = targetYearMonth.minusMonths(1);
+        YearMonth nextYearMonth = targetYearMonth.plusMonths(1);
+
+        model.addAttribute("targetMonthIncome", targetMonthIncome);
+        model.addAttribute("targetYearMonth", targetYearMonth.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM")));
+        model.addAttribute("targetMonthAssets", targetMonthAssets);
         model.addAttribute("allAssetMasters", allAssetMasters);
         model.addAttribute("existingAssetDataMap", existingAssetDataMap);
+        model.addAttribute("previousYearMonth", previousYearMonth.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM")));
+        model.addAttribute("nextYearMonth", nextYearMonth.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM")));
 
         return "home";
     }

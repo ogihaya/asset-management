@@ -22,7 +22,7 @@ public class AssetDataSaveController {
     public String saveAssetData(@RequestParam("assetMasterId") Long assetMasterId,
                                 @RequestParam("targetMonth") String targetMonth,
                                 @RequestParam("amount") int amount) {
-
+        
         AssetMaster assetMaster = assetMasterRepository.findById(assetMasterId).orElseThrow(() -> new RuntimeException("AssetMaster not found"));                       
 
         AssetData assetData = new AssetData();
