@@ -26,7 +26,7 @@
                         <div th:if="${!existingAssetDataMap.containsKey(assetMaster.id)}" class="asset-input-form">
                             <form th:action="@{/asset-save}" method="post" class="inline-form">
                                 <input type="hidden" name="assetMasterId" th:value="${assetMaster.id}">
-                                <input type="hidden" name="targetMonth" th:value="${currentYearMonth}">
+                                <input type="hidden" name="targetMonth" th:value="${targetYearMonth}">
                                 <input type="number" name="amount" placeholder="金額を入力" class="asset-amount-input">
                                 <button type="submit" class="btn-save">保存</button>
                             </form>

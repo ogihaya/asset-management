@@ -16,13 +16,14 @@ public class IncomeSaveController {
 
     @PostMapping("/income-save")
     public String incomeSave(@RequestParam("income") int income, @RequestParam("targetMonth") String targetMonthString) {
-        // 今月の収入が登録されているかチェック
+        
         YearMonth targetMonth = YearMonth.parse(targetMonthString);
         IncomeData incomeData = incomeDataRepository.findByTargetMonth(targetMonth).orElse(new IncomeData());
         incomeData.setAmount(income);
         incomeData.setTargetMonth(targetMonth);
         incomeDataRepository.save(incomeData);
 
-        return "redirect:/?targetMonth=" + targetMonth;
+        return "redirect:/?yearMonth=" + targetMonthString;
+        
     }
 }

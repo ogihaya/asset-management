@@ -7,7 +7,11 @@
     <script src="/js/modal.js"></script>
 </head>
 <body>
-    <div th:text="${currentYearMonth}"></div>
+    <div class="month-navigation">
+        <a th:href="@{/(yearMonth=${previousYearMonth})}" class="month-nav-button">←前月</a>
+        <span class="current-month" th:text="${targetYearMonth}"></span>
+        <a th:href="@{/(yearMonth=${nextYearMonth})}" class="month-nav-button">翌月→</a>
+    </div>
     <div th:insert="fragments/income-form :: incomeForm"></div>
     <div th:insert="fragments/asset-list :: assetList"></div>
 </body>
