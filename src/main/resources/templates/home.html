@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <title>資産管理アプリ</title>
     <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/graph.css">
     <script src="/js/modal.js"></script>
+    <script src="/js/graph.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="month-navigation">
@@ -14,5 +17,40 @@
     </div>
     <div th:insert="fragments/income-form :: incomeForm"></div>
     <div th:insert="fragments/asset-list :: assetList"></div>
+
+    <div class="graph-section">
+        <div class="graph-header">
+            <h2>グラフ</h2>
+            <div class="graph-controls">
+                <div class="graph-type-selector">
+                    <label for="dataTypeSelect">データタイプ</label>
+                    <select id="dataTypeSelect">
+                        <option value="total-assets">全資産</option>
+                        <option value="income">収入</option>
+                        <option value="specific-asset">特定資産</option>
+                    </select>
+
+                    <div id="assetSelectContainer" style="display: none;">
+                        <label for="assetSelect">資産選択</label>
+                        <select id="assetSelect">
+                            <option th:each="assetMaster : ${allAssetMasters}"
+                                    th:value="${assetMaster.id}"
+                                    th:text="${assetMaster.assetName}">
+                                資産名
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button id="updateGraphBtn" class="update-btn">更新</button>
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-card">
+                <h3 id="graphTitle">資産の推移</h3>
+                <canvas id="dataChart"></canvas>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
