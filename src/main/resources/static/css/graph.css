@@ -1,0 +1,96 @@
+/* グラフセクション全体のスタイル */
+.graph-section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* グラフヘッダー（タイトルとコントロール） */
+.graph-header {
+    margin-bottom: 20px;
+}
+
+.graph-header h2 {
+    margin: 0 0 15px 0;
+    color: #333;
+}
+
+/* グラフコントロール（データタイプ選択など） */
+.graph-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.graph-type-selector {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.graph-type-selector label {
+    font-weight: bold;
+    color: #555;
+}
+
+.graph-type-selector select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+#assetSelectContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.update-btn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.update-btn:hover {
+    background-color: #0056b3;
+}
+
+/* グラフコンテナ（重要：高さを制限） */
+.graph-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* グラフカード（グラフを包むカード） */
+.graph-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* 重要：高さを制限してグラフが無限に伸びるのを防ぐ */
+    height: 400px;
+    position: relative;
+}
+
+/* グラフタイトル */
+#graphTitle {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Canvas要素（グラフ本体） */
+#dataChart {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 350px !important;
+}
