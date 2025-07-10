@@ -20,19 +20,19 @@ public class AssetDataSaveController {
 
     @PostMapping("/asset-save")
     public String saveAssetData(@RequestParam("assetMasterId") Long assetMasterId,
-                                @RequestParam("targetMonth") String targetMonth,
+                                @RequestParam("targetMonth") String targetMonthString,
                                 @RequestParam("amount") int amount) {
         
         AssetMaster assetMaster = assetMasterRepository.findById(assetMasterId).orElseThrow(() -> new RuntimeException("AssetMaster not found"));                       
 
         AssetData assetData = new AssetData();
         assetData.setAssetMaster(assetMaster);
-        assetData.setTargetMonth(YearMonth.parse(targetMonth));
+        assetData.setTargetMonth(YearMonth.parse(targetMonthString));
         assetData.setAmount(amount);
 
         assetDataRepository.save(assetData);
 
-        return "redirect:/";
+        return "redirect:/?yearMonth=" + targetMonthString;
     }
     
 }

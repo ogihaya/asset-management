@@ -15,4 +15,10 @@ public interface IncomeDataRepository extends JpaRepository<IncomeData, Long>{
     List<YearMonth> findTargetMonthBy();
 
     Optional<IncomeData> findByTargetMonth(YearMonth targetMonth);
+
+    @Query("SELECT DISTINCT i.targetMonth FROM IncomeData i ORDER BY i.targetMonth")
+    List<YearMonth> findAllMonthsOrdered();
+
+    @Query("SELECT i.amount FROM IncomeData i WHERE i.targetMonth = :targetMonth")
+    Optional<Integer> findAmountByTargetMonth(YearMonth targetMonth);
 }
