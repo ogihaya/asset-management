@@ -14,13 +14,13 @@ public class AssetAddController {
     private AssetMasterRepository assetMasterRepository;
 
     @PostMapping("/add-asset")
-    public String AddAsset(@RequestParam("assetName") String assetName) {
+    public String AddAsset(@RequestParam("assetName") String assetName, @RequestParam("targetMonth") String targetMonth) {
         AssetMaster newAsset = new AssetMaster();
         newAsset.setAssetName(assetName.trim());
 
         assetMasterRepository.save(newAsset);
 
-        return "redirect:/";
+        return "redirect:/?yearMonth="+targetMonth;
     }
     
 }

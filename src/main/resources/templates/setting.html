@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>設定</title>
+</head>
+<body>
+    <a href="/">ホーム</a>
+
+    <div id="future-income-form">
+        <h2>収入設定</h2>
+        <form action="/setting/future-income" method="post">
+            <label for="startMonth">開始月</label>
+            <input type="month" id="startMonth" name="startMonth">
+            <label for="endMonth">終了月</label>
+            <input type="month" id="endMonth" name="endMonth">
+            <label for="startAmount">開始金額</label>
+            <input type="number" id="startAmount" name="startAmount">
+            <label for="endAmount">終了金額</label>
+            <input type="number" id="endAmount" name="endAmount">
+            <button type="submit">登録</button>
+        </form>
+    </div>
+    <div id="future-income-list">
+        <table>
+            <tr>
+                <th>開始月</th>
+                <th>終了月</th>
+                <th>開始金額</th>
+                <th>終了金額</th>
+            </tr>
+            <tr th:each="futureIncome : ${futureIncomes}">
+                <td th:text="${futureIncome.startMonth}"></td>
+                <td th:text="${futureIncome.endMonth}"></td>
+                <td th:text="${futureIncome.startAmount}"></td>
+                <td th:text="${futureIncome.endAmount}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="monthly-expense-form">
+        <h2>月々の支出設定</h2>
+        <form action="/setting/monthly-expense" method="post">
+            <label for="amount">金額</label>
+            <input type="number" id="amount" name="amount">
+            <label for="startMonth">開始月</label>
+            <input type="month" id="startMonth" name="startMonth">
+            <label for="endMonth">終了月</label>
+            <input type="month" id="endMonth" name="endMonth">
+        </form>
+    </div>
+    <div id="monthly-expense-list">
+        <table>
+            <tr>
+                <th>開始月</th>
+                <th>終了月</th>
+                <th>金額</th>
+            </tr>
+            <tr th:each="monthlyExpense : ${monthlyExpenses}">
+                <td th:text="${monthlyExpense.startMonth}"></td>
+                <td th:text="${monthlyExpense.endMonth}"></td>
+                <td th:text="${monthlyExpense.amount}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="future-expense-form">
+        <h2>将来の支出設定</h2>
+        <form action="/setting/future-expense" method="post">
+            <label for="expenseName">支出名</label>
+            <input type="text" id="expenseName" name="expenseName">
+            <label for="amount">金額</label>
+            <input type="number" id="amount" name="amount">
+            <label for="targetMonth">対象月</label>
+        </form>
+    </div>
+    <div id="future-expense-list">
+        <table>
+            <tr>
+                <th>支出名</th>
+                <th>金額</th>
+                <th>対象月</th>
+            </tr>
+            <tr th:each="futureExpense : ${futureExpenses}">
+                <td th:text="${futureExpense.expenseName}"></td>
+                <td th:text="${futureExpense.amount}"></td>
+                <td th:text="${futureExpense.targetMonth}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
