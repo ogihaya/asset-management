@@ -16,24 +16,16 @@ async function changeMonth(direction) {
             targetYearMonth = direction;
         }
         
-        console.log('月切り替え開始:', targetYearMonth);
-        
         // サーバーからHTMLフラグメントを取得
         const url = `/api/month-fragment?yearMonth=${targetYearMonth}`;
-        console.log('リクエストURL:', url);
-        
         const response = await fetch(url);
-        console.log('レスポンスステータス:', response.status);
-        console.log('レスポンスヘッダー:', response.headers);
         
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('サーバーエラー詳細:', errorText);
             throw new Error(`サーバーエラーが発生しました: ${response.status} ${response.statusText}`);
         }
         
         const html = await response.text();
-        console.log('取得したHTML:', html);
         
         // 特定の部分のみを更新
         document.getElementById('monthContent').innerHTML = html;
@@ -49,10 +41,7 @@ async function changeMonth(direction) {
             loadGraph();
         }
         
-        console.log('月切り替え完了');
-        
     } catch (error) {
-        console.error('月データの取得に失敗しました:', error);
         showError('データの取得に失敗しました: ' + error.message);
     } 
 }
@@ -84,6 +73,13 @@ function calculateNextMonth(yearMonth) {
     
     return `${newYear}-${String(newMonth).padStart(2, '0')}`;
 }
+
+document.getElementById('prevMonthBtn').addEventListener('click', function() {
+    changeMonth('previous');
+});
+document.getElementById('nextMonthBtn').addEventListener('click', function() {
+    changeMonth('next');
+});
 
 function showError(message) {
     const monthContent = document.getElementById('monthContent');

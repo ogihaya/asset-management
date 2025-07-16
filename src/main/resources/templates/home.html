@@ -12,9 +12,9 @@
 </head>
 <body>
     <div class="month-navigation">
-        <button class="month-nav-button" onclick="changeMonth('previous')">←前月</button>
+        <button class="month-nav-button" id="prevMonthBtn">←前月</button>
         <span class="current-month" id="currentMonth" th:text="${targetYearMonth}"></span>
-        <button class="month-nav-button" onclick="changeMonth('next')">翌月→</button>
+        <button class="month-nav-button" id="nextMonthBtn">翌月→</button>
     </div>
     
     <!-- 更新される部分 -->
