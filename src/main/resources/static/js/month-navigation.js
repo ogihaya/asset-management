@@ -1,3 +1,12 @@
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('prevMonthBtn').addEventListener('click', function() {
+        changeMonth('previous');
+    });
+    document.getElementById('nextMonthBtn').addEventListener('click', function() {
+        changeMonth('next');
+    });
+});
+
 // 月ナビゲーション機能
 async function changeMonth(direction) {
     try {
@@ -73,13 +82,6 @@ function calculateNextMonth(yearMonth) {
     
     return `${newYear}-${String(newMonth).padStart(2, '0')}`;
 }
-
-document.getElementById('prevMonthBtn').addEventListener('click', function() {
-    changeMonth('previous');
-});
-document.getElementById('nextMonthBtn').addEventListener('click', function() {
-    changeMonth('next');
-});
 
 function showError(message) {
     const monthContent = document.getElementById('monthContent');

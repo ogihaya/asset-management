@@ -95,7 +95,6 @@ function drawGraph(data, type) {
                 backgroundColor: backgroundColor,//背景の色
                 borderWidth: 3,//線の太さ
                 fill: true,//塗りつぶし
-                tension: 0.4,//曲線の曲がり具合
                 pointBackgroundColor: color,//ポイントの背景色
                 pointBorderColor: '#ffffff',//ポイントの枠線色
                 pointBorderWidth: 2,//ポイントの枠線の太さ

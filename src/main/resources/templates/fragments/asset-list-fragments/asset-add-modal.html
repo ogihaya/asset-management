@@ -10,6 +10,7 @@
                 <form id="addAssetForm" th:action="@{/add-asset}" method="post">
                     <div class="form-group">
                         <label for="assetName">資産名:</label>
+                        <input type="hidden" name="targetMonth" th:value="${targetYearMonth}">
                         <input type="text" id="assetName" name="assetName" required 
                                placeholder="例: クレジットカード、口座など">
                     </div>
