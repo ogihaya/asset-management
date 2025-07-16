@@ -7,16 +7,20 @@
     <link rel="stylesheet" href="/css/graph.css">
     <script src="/js/modal.js"></script>
     <script src="/js/graph.js"></script>
+    <script src="/js/month-navigation.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="month-navigation">
-        <a th:href="@{/(yearMonth=${previousYearMonth})}" class="month-nav-button">←前月</a>
-        <span class="current-month" th:text="${targetYearMonth}"></span>
-        <a th:href="@{/(yearMonth=${nextYearMonth})}" class="month-nav-button">翌月→</a>
+        <button class="month-nav-button" id="prevMonthBtn">←前月</button>
+        <span class="current-month" id="currentMonth" th:text="${targetYearMonth}"></span>
+        <button class="month-nav-button" id="nextMonthBtn">翌月→</button>
     </div>
-    <div th:insert="fragments/income-form :: incomeForm"></div>
-    <div th:insert="fragments/asset-list :: assetList"></div>
+    
+    <!-- 更新される部分 -->
+    <div id="monthContent">
+        <div th:insert="~{fragments/month-content :: monthContent}"></div>
+    </div>
 
     <div class="graph-section">
         <div class="graph-header">

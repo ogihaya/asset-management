@@ -1,0 +1,6 @@
+<div th:fragment="errorMessage">
+    <div class="error-container">
+        <p class="error-message" th:text="${error}">エラーメッセージ</p>
+        <button onclick="location.reload()" class="retry-btn">再読み込み</button>
+    </div>
+</div> 
