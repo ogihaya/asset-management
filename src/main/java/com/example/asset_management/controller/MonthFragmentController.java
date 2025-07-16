@@ -1,0 +1,80 @@
+package com.example.asset_management.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.example.asset_management.repository.IncomeDataRepository;
+import com.example.asset_management.repository.AssetDataRepository;
+import com.example.asset_management.repository.AssetMasterRepository;
+import com.example.asset_management.entity.IncomeData;
+import com.example.asset_management.entity.AssetData;
+import com.example.asset_management.entity.AssetMaster;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Controller
+public class MonthFragmentController {
+
+    private static final Logger logger = LoggerFactory.getLogger(MonthFragmentController.class);
+
+    @Autowired
+    private IncomeDataRepository incomeDataRepository;
+
+    @Autowired
+    private AssetDataRepository assetDataRepository;
+
+    @Autowired
+    private AssetMasterRepository assetMasterRepository;
+
+    @GetMapping("/api/month-fragment")
+    public String getMonthFragment(@RequestParam String yearMonth, Model model) {
+        try {
+            logger.info("月フラグメントの取得を開始: {}", yearMonth);
+            
+            // 1. パラメータをYearMonthに変換
+            YearMonth targetYearMonth = YearMonth.parse(yearMonth);
+            logger.info("対象年月: {}", targetYearMonth);
+            
+            // 2. データを取得
+            IncomeData income = incomeDataRepository.findByTargetMonth(targetYearMonth).orElse(null);
+            List<AssetData> assets = assetDataRepository.findByTargetMonthOrderByAssetMaster_AssetName(targetYearMonth);
+            List<AssetMaster> allAssetMasters = assetMasterRepository.findAll();
+            
+            logger.info("収入データ: {}", income != null ? income.getAmount() : "null");
+            logger.info("資産データ数: {}", assets.size());
+            logger.info("資産マスター数: {}", allAssetMasters.size());
+            
+            // 3. 既存の資産データをマップ化
+            Map<Long, AssetData> existingAssetDataMap = assets.stream()
+                .collect(Collectors.toMap(
+                    assetData -> assetData.getAssetMaster().getId(),
+                    assetData -> assetData
+                ));
+            
+            // 4. モデルにデータを追加
+            model.addAttribute("targetMonthIncome", income);
+            model.addAttribute("targetMonthAssets", assets);
+            model.addAttribute("allAssetMasters", allAssetMasters);
+            model.addAttribute("existingAssetDataMap", existingAssetDataMap);
+            model.addAttribute("targetYearMonth", targetYearMonth.format(DateTimeFormatter.ofPattern("yyyy-MM")));
+            
+            logger.info("月フラグメントの取得が完了しました");
+            
+            // 5. 部分テンプレートを返す
+            return "fragments/month-content :: monthContent";
+            
+        } catch (Exception e) {
+            logger.error("月フラグメントの取得中にエラーが発生しました: {}", e.getMessage(), e);
+            // エラーハンドリング
+            model.addAttribute("error", "データの取得に失敗しました: " + e.getMessage());
+            return "fragments/error :: errorMessage";
+        }
+    }
+} 
