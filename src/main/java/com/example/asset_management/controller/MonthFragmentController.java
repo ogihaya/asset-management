@@ -11,6 +11,10 @@ import com.example.asset_management.repository.AssetMasterRepository;
 import com.example.asset_management.entity.IncomeData;
 import com.example.asset_management.entity.AssetData;
 import com.example.asset_management.entity.AssetMaster;
+import com.example.asset_management.entity.InvestData;
+import com.example.asset_management.entity.InvestMaster;
+import com.example.asset_management.repository.InvestDataRepository;
+import com.example.asset_management.repository.InvestMasterRepository;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -28,6 +32,12 @@ public class MonthFragmentController {
 
     @Autowired
     private AssetMasterRepository assetMasterRepository;
+
+    @Autowired
+    private InvestDataRepository investDataRepository;
+
+    @Autowired
+    private InvestMasterRepository investMasterRepository;
 
     @GetMapping("/api/month-fragment")
     public String getMonthFragment(@RequestParam String yearMonth, Model model) {
@@ -54,14 +64,28 @@ public class MonthFragmentController {
             model.addAttribute("allAssetMasters", allAssetMasters);
             model.addAttribute("existingAssetDataMap", existingAssetDataMap);
             model.addAttribute("targetYearMonth", targetYearMonth.format(DateTimeFormatter.ofPattern("yyyy-MM")));
+
+            List<InvestData> invests = investDataRepository.findByTargetMonthOrderByInvestMaster_InvestName(targetYearMonth);
+            List<InvestMaster> allInvestMasters = investMasterRepository.findAll();
+            
+            // 3. 既存の資産データをマップ化
+            Map<Long, InvestData> existingInvestDataMap = invests.stream()
+                .collect(Collectors.toMap(
+                    investData -> investData.getInvestMaster().getId(),
+                    investData -> investData
+                ));
+
+            model.addAttribute("targetMonthInvests", invests);
+            model.addAttribute("allInvestMasters", allInvestMasters);
+            model.addAttribute("existingInvestDataMap", existingInvestDataMap);
             
             // 5. 部分テンプレートを返す
-            return "fragments/month-content :: monthContent";
+            return "home-fragments/month-content :: monthContent";
             
         } catch (Exception e) {
             // エラーハンドリング
             model.addAttribute("error", "データの取得に失敗しました: " + e.getMessage());
-            return "fragments/error :: errorMessage";
+            return "home-fragments/error :: errorMessage";
         }
     }
 } 

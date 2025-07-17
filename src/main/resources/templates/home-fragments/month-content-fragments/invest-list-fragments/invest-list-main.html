@@ -1,0 +1,39 @@
+<div th:fragment="investListMain">
+    <!-- 投資データがない場合のメッセージ -->
+    <div th:if="${#lists.isEmpty(allInvestMasters)}" class="no-data-message">
+        <p>この月の投資データがありません。</p>
+    </div>
+        
+    <!-- 投資名と金額のリスト -->
+    <div th:if="${!#lists.isEmpty(allInvestMasters)}" class="invest-list">
+        <table class="invest-table">
+            <thead>
+                <tr>
+                    <th>投資名</th>
+                    <th>金額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 各投資データをループで表示 -->
+                <tr th:each="investMaster : ${allInvestMasters}">
+                    <td th:text="${investMaster.investName}">投資名</td>
+                    <td>
+                        <!--その月にデータがある場合、金額を表示-->
+                        <div th:if="${existingInvestDataMap.containsKey(investMaster.id)}" class="invest-amount">
+                            <span th:text="${#numbers.formatInteger(existingInvestDataMap.get(investMaster.id).amount, 1, 'COMMA')} + '円'"></span>
+                        </div>
+                        <!--その月にデータがない場合、入力を表示-->
+                        <div th:if="${!existingInvestDataMap.containsKey(investMaster.id)}" class="invest-input-form">
+                            <form th:action="@{/invest-save}" method="post" class="inline-form">
+                                <input type="hidden" name="investMasterId" th:value="${investMaster.id}">
+                                <input type="hidden" name="targetMonth" th:value="${targetYearMonth}">
+                                <input type="number" name="amount" placeholder="金額を入力" class="invest-amount-input">
+                                <button type="submit" class="btn-save">保存</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

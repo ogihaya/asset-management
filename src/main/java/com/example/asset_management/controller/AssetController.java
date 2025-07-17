@@ -16,6 +16,10 @@ import com.example.asset_management.entity.AssetMaster;
 import com.example.asset_management.repository.AssetMasterRepository;
 import java.util.Map;
 import java.util.stream.Collectors;
+import com.example.asset_management.repository.InvestMasterRepository;
+import com.example.asset_management.repository.InvestDataRepository;
+import com.example.asset_management.entity.InvestData;
+import com.example.asset_management.entity.InvestMaster;
 
 @Controller // このアノテーションでSpringにコントローラーであることを伝えます
 public class AssetController {
@@ -31,6 +35,14 @@ public class AssetController {
     // 資産マスター（資産の種類など）にアクセスするためのリポジトリを自動で注入
     @Autowired
     private AssetMasterRepository assetMasterRepository;
+
+    // 投資マスター（投資の種類など）にアクセスするためのリポジトリを自動で注入
+    @Autowired
+    private InvestMasterRepository investMasterRepository;
+
+    // 投資データにアクセスするためのリポジトリを自動で注入
+    @Autowired
+    private InvestDataRepository investDataRepository;
 
     /**
      * 資産一覧画面を表示するメソッド
@@ -74,6 +86,27 @@ public class AssetController {
         model.addAttribute("targetMonthAssets", targetMonthAssets); // 今月の資産データ一覧
         model.addAttribute("allAssetMasters", allAssetMasters); // 資産マスター一覧
         model.addAttribute("existingAssetDataMap", existingAssetDataMap); // 既存資産データのMap
+
+
+
+        // 指定した月の投資データを投資名順で取得
+        List<InvestData> targetMonthInvests = investDataRepository.findByTargetMonthOrderByInvestMaster_InvestName(targetYearMonth);
+
+        // 全ての投資マスター（投資の種類一覧）を取得
+        List<InvestMaster> allInvestMasters = investMasterRepository.findAll();
+
+        // 既存の資産データを資産マスターIDをキーにしてMap化（後で画面で使いやすくするため）
+        Map<Long, InvestData> existingInvestDataMap = targetMonthInvests.stream()
+            .collect(Collectors.toMap(
+                investData -> investData.getInvestMaster().getId(), // キー：投資マスターID
+                investData -> investData // 値：投資データ
+            ));
+
+        // 画面に渡す値をmodelにセット
+        model.addAttribute("targetMonthInvests", targetMonthInvests); // 今月の投資データ一覧
+        model.addAttribute("allInvestMasters", allInvestMasters); // 投資マスター一覧
+        model.addAttribute("existingInvestDataMap", existingInvestDataMap); // 既存投資データのMap
+
 
         // home.html（テンプレート）を表示
         return "home";

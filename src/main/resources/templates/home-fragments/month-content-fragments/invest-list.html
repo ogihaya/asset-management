@@ -1,0 +1,15 @@
+<div th:fragment="investList">
+        <!-- 投資名のリストを表示 -->
+        <div th:replace="~{home-fragments/month-content-fragments/invest-list-fragments/invest-list-main :: investListMain}"></div>
+
+        <!-- 投資追加ボタン -->
+        <div class="add-invest-section">
+            <button type="button" class="btn btn-primary" id="addInvestButton">
+                追加
+            </button>
+        </div>
+    
+        <!-- 投資追加モーダル -->
+        <div th:replace="~{home-fragments/month-content-fragments/invest-list-fragments/invest-add-modal :: investAddModal}"></div>
+    
+</div>
