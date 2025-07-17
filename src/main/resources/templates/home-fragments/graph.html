@@ -9,6 +9,7 @@
                         <option value="total-assets">全資産</option>
                         <option value="income">収入</option>
                         <option value="specific-asset">特定資産</option>
+                        <option value="specific-invest">特定投資</option>
                     </select>
 
                     <div id="assetSelectContainer" style="display: none;">
@@ -18,6 +19,16 @@
                                     th:value="${assetMaster.id}"
                                     th:text="${assetMaster.assetName}">
                                 資産名
+                            </option>
+                        </select>
+                    </div>
+                    <div id="investSelectContainer" style="display: none;">
+                        <label for="investSelect">投資選択</label>
+                        <select id="investSelect">
+                            <option th:each="investMaster : ${allInvestMasters}"
+                                    th:value="${investMaster.id}"
+                                    th:text="${investMaster.investName}">
+                                投資名
                             </option>
                         </select>
                     </div>

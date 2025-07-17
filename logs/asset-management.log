@@ -781,3 +781,46 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 2025-07-17 18:40:24 [INFO] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-07-17 18:40:24 [INFO] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2025-07-17 18:40:24 [INFO] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-07-17 19:31:37 [INFO] o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-07-17 19:31:37 [INFO] o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-17 19:31:37 [INFO] o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-07-17 19:31:37 [INFO] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-17 19:31:37 [WARN] o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: データベースはすでに閉じられています (VM終了時の自動データベースクローズを無効にするためには、db URLに ";DB_CLOSE_ON_EXIT=FALSE" を追加してください)
+Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-07-17 19:31:37 [INFO] com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2025-07-17 19:31:37 [INFO] com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+2025-07-17 19:31:37 [INFO] c.e.a.AssetManagementApplication - Starting AssetManagementApplication using Java 24.0.1 with PID 34244 (C:\asset management\asset-management\target\classes started by ogiha in C:\asset management\asset-management)
+2025-07-17 19:31:37 [DEBUG] c.e.a.AssetManagementApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2025-07-17 19:31:37 [INFO] c.e.a.AssetManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-17 19:31:37 [INFO] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-17 19:31:37 [INFO] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 8 JPA repository interfaces.
+2025-07-17 19:31:37 [INFO] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-17 19:31:37 [INFO] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-17 19:31:37 [INFO] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-17 19:31:37 [INFO] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-17 19:31:37 [INFO] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 530 ms
+2025-07-17 19:31:37 [INFO] com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+2025-07-17 19:31:37 [INFO] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection conn59: url=jdbc:h2:mem:2c9aeb38-58ca-46c2-b610-c266a86d125e user=SA
+2025-07-17 19:31:37 [INFO] com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+2025-07-17 19:31:37 [INFO] o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-17 19:31:37 [INFO] o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-17 19:31:37 [INFO] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-17 19:31:37 [INFO] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-4)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-17 19:31:38 [INFO] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-17 19:31:38 [INFO] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-17 19:31:38 [WARN] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-17 19:31:38 [INFO] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:2c9aeb38-58ca-46c2-b610-c266a86d125e'
+2025-07-17 19:31:38 [INFO] o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-07-17 19:31:38 [INFO] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-07-17 19:31:38 [INFO] c.e.a.AssetManagementApplication - Started AssetManagementApplication in 1.295 seconds (process running for 7373.291)
+2025-07-17 19:31:38 [INFO] o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2025-07-17 19:31:45 [INFO] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-17 19:31:45 [INFO] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-07-17 19:31:45 [INFO] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
