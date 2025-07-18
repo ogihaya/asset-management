@@ -1,21 +1,20 @@
-<div th:fragment="assetAddModal">
-    <!-- モーダル -->
-    <div id="addAssetModal" class="modal">
+<div th:fragment="investAddModal">
+    <div id="addInvestModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>新しい資産を追加</h3>
-                <span class="close" onclick="closeAddAssetModal()">&times;</span>
+                <h3>新しい投資を追加</h3>
+                <span class="close" id="closeInvestButton">&times;</span>
             </div>
             <div class="modal-body">
-                <form id="addAssetForm" th:action="@{/add-asset}" method="post">
+                <form id="addInvestForm" th:action="@{/add-invest}" method="post">
                     <div class="form-group">
-                        <label for="assetName">資産名:</label>
+                        <label for="investName">投資名:</label>
                         <input type="hidden" name="targetMonth" th:value="${targetYearMonth}">
-                        <input type="text" id="assetName" name="assetName" required 
-                               placeholder="例: クレジットカード、口座など">
+                        <input type="text" id="investName" name="investName" required 
+                               placeholder="例: 株式、債券など">
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-secondary" onclick="closeAddAssetModal()">
+                        <button type="button" class="btn btn-secondary" id="closeInvestButton">
                             キャンセル
                         </button>
                         <button type="submit" class="btn btn-primary">

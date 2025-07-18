@@ -1,6 +1,7 @@
 let dataChart;
 let currentType = "total-assets";
 let currentAssetId = null;
+let currentInvestId = null;
 
 document.addEventListener("DOMContentLoaded", function() {
     loadGraph();
@@ -20,6 +21,13 @@ function setupEventListeners() {
 
     assetSelect.addEventListener("change", function() {
         currentAssetId = assetSelect.value;
+        loadGraph();
+    });
+
+    const investSelect = document.getElementById("investSelect");
+
+    investSelect.addEventListener("change", function() {
+        currentInvestId = investSelect.value;
         loadGraph();
     });
     
@@ -48,6 +56,19 @@ function updateAssetOptions() {
         currentAssetId = null;
         assetSelect.value = "";
     }
+
+    const investSelectContainer = document.getElementById("investSelectContainer");
+    const investSelect = document.getElementById("investSelect");
+
+    if(dataTypeSelect.value === "specific-invest") {
+        investSelectContainer.style.display = "block";
+
+        if(investSelect.options.length > 0) {
+            currentInvestId = investSelect.options[0].value;
+        }
+    } else {
+        investSelectContainer.style.display = "none";
+    }
 }
 
 async function loadGraph() {
@@ -58,6 +79,9 @@ async function loadGraph() {
         let url = `/api/graph/data?type=${currentType}`;
         if(currentType === "specific-asset" && currentAssetId) {
             url += `&assetId=${currentAssetId}`;
+        }
+        if(currentType === "specific-invest" && currentInvestId) {
+            url += `&investId=${currentInvestId}`;
         }
 
         const response = await fetch(url);
@@ -137,7 +161,7 @@ function getYAxisConfig(amounts, type) {
     const minAmount = Math.min(...amounts);
     const range = maxAmount - minAmount;
 
-    if(type === "income") {
+    if(type === "income" || type === "specific-invest") {
         return {
             beginAtZero: true,
             ticks: {
@@ -188,6 +212,11 @@ function getGraphConfig(type) {
             title: "特定資産",
             color: "#ed8936",
             backgroundColor: "rgba(237, 137, 54, 0.1)",
+        },
+        "specific-invest": {
+            title: "特定投資",
+            color: "#48bb78",
+            backgroundColor: "rgba(72, 187, 120, 0.1)",
         }
     };
 
