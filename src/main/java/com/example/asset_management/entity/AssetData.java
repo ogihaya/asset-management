@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import java.time.YearMonth;
+import jakarta.persistence.Convert;
 
 @Entity
 @Table(name = "asset_data")
@@ -24,5 +25,6 @@ public class AssetData {
 
     private int amount;//資産の金額
 
+    @Convert(converter = YearMonthConverter.class)
     private YearMonth targetMonth;//資産の対象月
 }

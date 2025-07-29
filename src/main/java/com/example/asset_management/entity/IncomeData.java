@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.YearMonth;
+import jakarta.persistence.Convert;
 
 @Entity
 @Table(name = "income_data")
@@ -18,5 +19,6 @@ public class IncomeData {
 
     private int amount;
 
+    @Convert(converter = YearMonthConverter.class)
     private YearMonth targetMonth;
 }

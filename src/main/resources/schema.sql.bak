@@ -1,0 +1,65 @@
+-- 資産マスターテーブル
+CREATE TABLE IF NOT EXISTS asset_masters (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    asset_name VARCHAR(255) NOT NULL
+);
+
+-- 資産データテーブル
+CREATE TABLE IF NOT EXISTS asset_data (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    asset_masters_id BIGINT,
+    amount DECIMAL(15,2),
+    target_month VARCHAR(7),  -- 'YYYY-MM'形式
+    FOREIGN KEY (asset_masters_id) REFERENCES asset_masters(id)
+);
+
+-- 月次支出テーブル
+CREATE TABLE IF NOT EXISTS monthly_expense (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    expense_name VARCHAR(255),  -- 追加
+    amount DECIMAL(15,2),
+    start_month VARCHAR(7),     -- 'YYYY-MM'形式
+    end_month VARCHAR(7)        -- 'YYYY-MM'形式
+);
+
+-- 収入データテーブル
+CREATE TABLE IF NOT EXISTS income_data (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    income_name VARCHAR(255),   -- 追加
+    amount DECIMAL(15,2),
+    target_month VARCHAR(7)     -- 'YYYY-MM'形式
+);
+
+-- 投資マスターテーブル
+CREATE TABLE IF NOT EXISTS invest_master (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    invest_name VARCHAR(255),
+    invest_type VARCHAR(50)
+);
+
+-- 投資データテーブル
+CREATE TABLE IF NOT EXISTS invest_data (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    invest_master_id BIGINT,
+    amount DECIMAL(15,2),
+    target_month VARCHAR(7),    -- 'YYYY-MM'形式
+    FOREIGN KEY (invest_master_id) REFERENCES invest_master(id)
+);
+
+-- 将来支出テーブル
+CREATE TABLE IF NOT EXISTS future_expense (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    expense_name VARCHAR(255),
+    amount DECIMAL(15,2),
+    target_month VARCHAR(7)     -- 'YYYY-MM'形式
+);
+
+-- 将来収入テーブル
+CREATE TABLE IF NOT EXISTS future_income (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    income_name VARCHAR(255),   -- 追加
+    start_amount DECIMAL(15,2), -- 追加
+    end_amount DECIMAL(15,2),   -- 追加
+    start_month VARCHAR(7),     -- 'YYYY-MM'形式
+    end_month VARCHAR(7)        -- 'YYYY-MM'形式
+);
