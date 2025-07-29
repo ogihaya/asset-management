@@ -5,20 +5,22 @@
     <title>資産管理アプリ</title>
     <link rel="stylesheet" href="/css/modal.css">
     <link rel="stylesheet" href="/css/graph.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/monthContent.css">
+    <link rel="stylesheet" href="/css/calcInvestResult.css">
     <script src="/js/modal.js"></script>
     <script src="/js/graph.js"></script>
     <script src="/js/month-navigation.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div id="setting-section">
-        <a href="/setting">設定</a>
-    </div>
-    
-    <div class="month-navigation">
-        <button class="month-nav-button" id="prevMonthBtn">←前月</button>
-        <span class="current-month" id="currentMonth" th:text="${targetYearMonth}"></span>
-        <button class="month-nav-button" id="nextMonthBtn">翌月→</button>
+    <div class="header-section">
+        <div class="month-navigation">
+            <button class="month-nav-button" id="prevMonthBtn">←前月</button>
+            <span class="current-month" id="currentMonth" th:text="${targetYearMonth}"></span>
+            <button class="month-nav-button" id="nextMonthBtn">翌月→</button>
+        </div>
+        <a href="/setting" class="setting-home-button">設定</a>
     </div>
     
     <!-- 更新される部分 -->

@@ -1,0 +1,114 @@
+/* 投資計算セクション全体 */
+.investment-calculation-section {
+    background: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin-bottom: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.investment-calculation-section h3 {
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+/* 計算ボタン */
+.btn-calculate {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: inline-block;
+    margin: 0 auto 12px auto;
+}
+
+.btn-calculate:hover {
+    background: #0056b3;
+}
+
+/* 計算結果表示エリア */
+#calcInvestResult {
+    margin-top: 12px;
+}
+
+.calculation-result {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 12px;
+    border-left: 3px solid #28a745;
+}
+
+.calculation-result h4 {
+    color: #28a745;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.calculation-result p {
+    margin: 6px 0;
+    font-size: 12px;
+    color: #495057;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.calculation-result p:last-child {
+    border-bottom: none;
+}
+
+.calculation-result strong {
+    color: #495057;
+    font-weight: 600;
+}
+
+.calculation-result span {
+    color: #28a745;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .investment-calculation-section {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .investment-calculation-section h3 {
+        font-size: 14px;
+    }
+    
+    .calculation-result {
+        padding: 10px;
+    }
+    
+    .calculation-result p {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+    }
+    
+    .calculation-result span {
+        font-size: 12px;
+    }
+    
+    .btn-calculate {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}
