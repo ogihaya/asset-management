@@ -1,0 +1,160 @@
+/* ヘッダーセクション */
+.header-section {
+    /* 内側の余白：上下10px、左右20px */
+    padding: 10px 20px;
+    /* 下側の外側余白を20pxに設定 */
+    margin-bottom: 20px;
+}
+
+/* 月ナビゲーション */
+.month-navigation {
+    /* 子要素間の間隔を10pxに設定 */
+    gap: 10px;
+    /* 中央に配置するための設定 */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 設定ボタンのスタイル */
+.setting-home-button {
+    /* インライン要素として表示（テキストと同じ行に配置） */
+    display: inline-block;
+    /* 下線を削除 */
+    text-decoration: none;
+    /* テキストの色を白に設定 */
+    color: #ffffff;
+    /* グラデーション背景：左上から右下へのグラデーション（紫系） */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* 内側の余白：上下8px、左右16px */
+    padding: 8px 16px;
+    /* 角を丸くする（20pxの半径） */
+    border-radius: 20px;
+    /* ボーダーを削除 */
+    border: none;
+    /* フォントを太字に設定 */
+    font-weight: 600;
+    /* フォントサイズを12pxに設定 */
+    font-size: 12px;
+    /* 影を追加：水平0px、垂直2px、ぼかし8px、色は紫系の半透明 */
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    /* アニメーション効果：全てのプロパティを0.3秒で変化 */
+    transition: all 0.3s ease;
+    /* マウスカーソルをポインター（手の形）に変更 */
+    cursor: pointer;
+    /* 右端に配置するための設定 */
+    position: absolute;
+    right: 20px;
+}
+
+/* 設定ボタンのホバー効果（マウスが上に乗った時のスタイル） */
+.setting-home-button:hover {
+    /* 要素を上に1px移動（浮き上がる効果） */
+    transform: translateY(-1px);
+    /* 影をより大きく、濃くする */
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    /* グラデーションを少し暗くする */
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    /* 下線を削除（リンクのデフォルトスタイルを無効化） */
+    text-decoration: none;
+    /* テキストの色を白に設定（リンクのデフォルト色を上書き） */
+    color: #ffffff;
+}
+
+/* ... existing code ... */
+
+/* 月ナビゲーション全体のレイアウト */
+.month-navigation {
+    /* 子要素間の間隔を20pxに設定 */
+    gap: 20px;
+    /* 中央に配置するための設定 */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    /* 子要素を横並びに配置 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 月ナビゲーションボタンのシンプルなスタイル */
+.month-nav-button {
+    /* ブロック要素として表示 */
+    display: block;
+    /* 下線を削除 */
+    text-decoration: none;
+    /* テキストの色を濃いグレーに設定 */
+    color: #333333;
+    /* 背景色を白に設定 */
+    background-color: #ffffff;
+    /* 内側の余白：上下8px、左右16px */
+    padding: 8px 16px;
+    /* 角を丸くする（6pxの半径） */
+    border-radius: 6px;
+    /* ボーダーを追加：1pxの実線、色はグレー */
+    border: 1px solid #dddddd;
+    /* フォントを通常の太さに設定 */
+    font-weight: 400;
+    /* フォントサイズを14pxに設定 */
+    font-size: 14px;
+    /* 影を追加：水平0px、垂直1px、ぼかし3px、色はグレーの半透明 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* アニメーション効果：全てのプロパティを0.2秒で変化 */
+    transition: all 0.2s ease;
+    /* マウスカーソルをポインター（手の形）に変更 */
+    cursor: pointer;
+    /* 最小幅を設定 */
+    min-width: 60px;
+    /* テキストを中央揃えに設定 */
+    text-align: center;
+}
+
+/* 月ナビゲーションボタンのホバー効果 */
+.month-nav-button:hover {
+    /* 背景色を薄いグレーに変更 */
+    background-color: #f5f5f5;
+    /* ボーダーの色を少し濃くする */
+    border-color: #cccccc;
+    /* 影を少し大きくする */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    /* 下線を削除 */
+    text-decoration: none;
+    /* テキストの色を濃いグレーに設定 */
+    color: #333333;
+}
+
+/* 月ナビゲーションボタンのアクティブ効果（クリック時） */
+.month-nav-button:active {
+    /* 背景色をより濃いグレーに変更 */
+    background-color: #e8e8e8;
+    /* 影を小さくする */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 現在の月表示のシンプルなスタイル */
+.current-month {
+    /* ブロック要素として表示 */
+    display: block;
+    /* テキストの色を濃いグレーに設定 */
+    color: #333333;
+    /* フォントを太字に設定 */
+    font-weight: 600;
+    /* フォントサイズを16pxに設定 */
+    font-size: 16px;
+    /* 内側の余白：上下10px、左右20px */
+    padding: 10px 20px;
+    /* 背景色を白に設定 */
+    background-color: #ffffff;
+    /* 角を丸くする（6pxの半径） */
+    border-radius: 6px;
+    /* 影を追加：水平0px、垂直2px、ぼかし4px、色はグレーの半透明 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* ボーダーを追加：1pxの実線、色はグレー */
+    border: 1px solid #dddddd;
+    /* 最小幅を設定 */
+    min-width: 100px;
+    /* テキストを中央揃えに設定 */
+    text-align: center;
+    /* アニメーション効果：全てのプロパティを0.2秒で変化 */
+    transition: all 0.2s ease;
+}
