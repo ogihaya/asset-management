@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 import java.time.YearMonth;
+import jakarta.persistence.Convert;
 
 @Entity
 @Table(name = "monthly_expenses")
@@ -18,7 +19,9 @@ public class MonthlyExpense {
 
     private int amount;
 
+    @Convert(converter = YearMonthConverter.class)
     private YearMonth startMonth;
 
+    @Convert(converter = YearMonthConverter.class)
     private YearMonth endMonth;
 }

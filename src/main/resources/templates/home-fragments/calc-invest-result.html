@@ -1,0 +1,27 @@
+<div th:fragment="calcInvestResult">
+    <div class="investment-calculation-section">
+        <h3>投資戦略計算</h3>
+        
+        <!-- 計算フォーム -->
+        <form th:action="@{/calculate-investment}" method="post" style="display: inline;">
+            <input type="hidden" name="targetMonth" th:value="${targetYearMonth}">
+            <button type="submit" class="btn-calculate">
+                投資計算
+            </button>
+        </form>
+        
+        <!-- 計算結果表示エリア -->
+        <div id="calcInvestResult">
+            <!-- 既存の計算結果があれば表示 -->
+            <div th:if="${investmentCalculation}" class="calculation-result">
+                <h4>計算結果</h4>
+                <p><strong>いつまで:</strong> 
+                   <span th:text="${#temporals.format(investmentCalculation.optimalMonth, 'yyyy年MM月')}"></span>
+                </p>
+                <p><strong>月々の投資額:</strong> 
+                   <span th:text="${#numbers.formatDecimal(investmentCalculation.investmentAmount, 1, 3)} + '円'"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

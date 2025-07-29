@@ -20,6 +20,9 @@ import com.example.asset_management.repository.InvestMasterRepository;
 import com.example.asset_management.repository.InvestDataRepository;
 import com.example.asset_management.entity.InvestData;
 import com.example.asset_management.entity.InvestMaster;
+import com.example.asset_management.repository.InvestmentCalculationRepository;
+import com.example.asset_management.entity.InvestmentCalculation;
+import java.util.Optional;
 
 @Controller // このアノテーションでSpringにコントローラーであることを伝えます
 public class AssetController {
@@ -43,6 +46,9 @@ public class AssetController {
     // 投資データにアクセスするためのリポジトリを自動で注入
     @Autowired
     private InvestDataRepository investDataRepository;
+
+    @Autowired
+    private InvestmentCalculationRepository investmentCalculationRepository;
 
     /**
      * 資産一覧画面を表示するメソッド
@@ -106,6 +112,11 @@ public class AssetController {
         model.addAttribute("targetMonthInvests", targetMonthInvests); // 今月の投資データ一覧
         model.addAttribute("allInvestMasters", allInvestMasters); // 投資マスター一覧
         model.addAttribute("existingInvestDataMap", existingInvestDataMap); // 既存投資データのMap
+
+        // 投資戦略計算結果を取得
+        Optional<InvestmentCalculation> investmentCalculationOpt = investmentCalculationRepository.findFirstByOrderByIdDesc();
+        InvestmentCalculation investmentCalculation = investmentCalculationOpt.orElse(null);
+        model.addAttribute("investmentCalculation", investmentCalculation);
 
 
         // home.html（テンプレート）を表示

@@ -7,20 +7,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 import java.time.YearMonth;
-import jakarta.persistence.Convert;
 
 @Entity
-@Table(name = "future_expenses")
+@Table(name = "investment_calculation")
 @Data
-public class FutureExpense {
+public class InvestmentCalculation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String expenseName;
-
-    private int amount;
-
-    @Convert(converter = YearMonthConverter.class)
-    private YearMonth targetMonth;
-}
+    
+    private YearMonth optimalMonth; // 最適な投資月
+    private double investmentAmount; // 投資可能額
+} 

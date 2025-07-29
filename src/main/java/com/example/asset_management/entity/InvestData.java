@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import lombok.Data;
 import java.time.YearMonth;
+import jakarta.persistence.Convert;
 
 @Entity
 @Table(name = "invest_data")
@@ -24,6 +25,7 @@ public class InvestData {
     
     private int amount;
     
+    @Convert(converter = YearMonthConverter.class)
     private YearMonth targetMonth;
 }
     
