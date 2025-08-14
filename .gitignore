@@ -34,3 +34,16 @@ build/
 
 .logs/asset_management.log
 *.gz
+
+# 環境変数ファイル
+.env
+.env.local
+.env.production
+
+# キーペアファイル
+*.pem
+*.key
+
+# ログファイル
+logs/
+*.log
